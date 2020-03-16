@@ -290,6 +290,12 @@ namespace Eyer {
         VIDEO_FRAGMENT_CHANGE_TRANS,
         VIDEO_FRAGMENT_CHANGE_SCALE
     };
+
+     enum EyerVideoScaleType
+    {
+        VIDEO_FRAGMENT_CENTER_INSIDE
+    };
+
     class EyerVideoFragmentVideo : public EyerVideoFragment
     {
     public:
@@ -307,6 +313,7 @@ namespace Eyer {
         int AddTransKey(double t, float x, float y, float z);
         int AddScaleKey(double t, float x, float y, float z);
         int GetLinearValue(EyerVideoChangeType type, double t, float & x, float & y, float & z);
+        int GetTypeScale(EyerVideoScaleType scaleType, int o_w, int o_h, int t_w, int t_h, float & scale_w, float & scale_h);
 
         double GetDuration();
 
