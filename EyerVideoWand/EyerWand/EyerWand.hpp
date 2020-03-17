@@ -212,6 +212,12 @@ namespace Eyer {
         EyerLinkedList<EyerAudioFragment *> audioFragmentList;
     };
 
+    enum EyerVideoFilterType
+    {
+        GAUSSIAN_BLUR,
+        ZOOM_BLUR
+    };
+
     class EyerVideoLayout {
     public:
         EyerVideoLayout();
@@ -270,6 +276,14 @@ namespace Eyer {
         EyerTransKey & operator = (const EyerTransKey & tk);
     };
 
+    class EyerFilterKey
+    {
+    public:
+        double t;
+        EyerLinkedList<int> filterNameList;
+        int level;
+    };
+
     enum EyerVideoFragmentType
     {
         VIDEO_FRAGMENT_VIDEO,
@@ -315,6 +329,9 @@ namespace Eyer {
         int GetLinearValue(EyerVideoChangeType type, double t, float & x, float & y, float & z);
         int GetTypeScale(EyerVideoScaleType scaleType, int o_w, int o_h, int t_w, int t_h, float & scale_w, float & scale_h);
 
+        int AddFilterKey(double t, EyerLinkedList<int> filterNameList, int level);
+        int filterLinear(double t, EyerLinkedList<int> & filterNameList, int & level);
+
         double GetDuration();
 
         int Print();
@@ -339,6 +356,8 @@ namespace Eyer {
 
         Eyer::EyerLinkedList<EyerTransKey *> transKeyList;
         Eyer::EyerLinkedList<EyerTransKey *> scaleKeyList;
+
+        Eyer::EyerLinkedList<EyerFilterKey *> filterKeyList;
 
     };
 

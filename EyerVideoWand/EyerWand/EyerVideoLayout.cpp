@@ -190,18 +190,39 @@ namespace Eyer
             delete frameBuffer;
             delete yuv2texture;
 
-            Eyer::EyerGominoGaussianBlur gb0;
-            Eyer::EyerGominoGaussianBlur gb1;
-            Eyer::EyerGominoGaussianBlur gb2;
-            Eyer::EyerGominoGaussianBlur gb3;
-
+            printf("aaaaaaaaaaaaaaaaaaaaaaaa\n");
+            Eyer::EyerLinkedList<EyerGominoGaussianBlur *> blurList; 
+            Eyer::EyerLinkedList<int> filterNames;
+            int level = 1;
+            printf("aaaaaaaaaaaaaaaaaaaaaaaa\n");
+            vfv->filterLinear(ts, filterNames, level);
             Eyer::EyerGominoPip pip;
-            pip << &gb0;
-            pip << &gb1;
-            pip << &gb2;
-            pip << &gb3;
+            for(int i=0; i<filterNames.getLength(); i++){
+                int filterType;
+                filterNames.find(i, filterType);
+                if((EyerVideoFilterType)filterType == EyerVideoFilterType::GAUSSIAN_BLUR){
+                    for(int j=0; j<level; level++){
+                        Eyer::EyerGominoGaussianBlur * gb = new Eyer::EyerGominoGaussianBlur();
+                        pip << gb;
+                        blurList.insertBack(gb);
+                    }
+                }
+            }
+            
+            // pip << &gb0;
+            // pip << &gb1;
+            // pip << &gb2;
+            // pip << &gb3;
+
+            // Eyer::EyerGominoGaussianBlur gb0;
+            // Eyer::EyerGominoGaussianBlur gb1;
+            // Eyer::EyerGominoGaussianBlur gb2;
+            // Eyer::EyerGominoGaussianBlur gb3;
 
             pip.Go(&yuv2rgbTexture, &panel->targetTexture, width, height);
+            for(int i=0; i<blurList.getLength(); i++){
+                blurList.clear();
+            }
 
             {
                 float x = 0.0;

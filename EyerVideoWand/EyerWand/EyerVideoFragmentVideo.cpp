@@ -240,4 +240,33 @@ namespace Eyer
     {
         return EyerVideoFragmentType::VIDEO_FRAGMENT_VIDEO;
     }
+
+    int EyerVideoFragmentVideo::AddFilterKey(double t, EyerLinkedList<int> filterNameList, int level)
+    {
+        EyerFilterKey * filterKey = new EyerFilterKey();
+        filterKey->t = t;
+        filterKey->level = level;
+        for(int i=0; i<filterNameList.getLength(); i++){
+            int data;
+            filterNameList.find(i,data);
+            filterKey->filterNameList.insertBack(data);
+        }
+
+        filterKeyList.insertBack(filterKey);
+    }
+
+    int EyerVideoFragmentVideo::filterLinear(double t, EyerLinkedList<int> & filterNameList, int & level)
+    {
+        EyerFilterKey * filterKey;
+        filterKeyList.find(0, filterKey);
+
+        int data;
+        filterKey->filterNameList.find(0,data);
+
+        filterNameList.insertBack(data);
+        level = filterKey->level;
+        return 0;
+    }
+
+
 }
