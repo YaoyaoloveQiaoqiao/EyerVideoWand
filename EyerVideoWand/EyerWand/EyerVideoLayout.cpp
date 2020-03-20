@@ -190,39 +190,33 @@ namespace Eyer
             delete frameBuffer;
             delete yuv2texture;
 
-            printf("aaaaaaaaaaaaaaaaaaaaaaaa\n");
-            Eyer::EyerLinkedList<EyerGominoGaussianBlur *> blurList; 
+            Eyer::EyerLinkedList<EyerGomino *> blurList;
             Eyer::EyerLinkedList<int> filterNames;
-            int level = 1;
-            printf("aaaaaaaaaaaaaaaaaaaaaaaa\n");
+            int level = -1;
             vfv->filterLinear(ts, filterNames, level);
             Eyer::EyerGominoPip pip;
+            Eyer::EyerGominoCopy cp0;
+            pip << &cp0;
             for(int i=0; i<filterNames.getLength(); i++){
                 int filterType;
                 filterNames.find(i, filterType);
                 if((EyerVideoFilterType)filterType == EyerVideoFilterType::GAUSSIAN_BLUR){
-                    for(int j=0; j<level; level++){
+                    for(int j=0; j<level; j++){
                         Eyer::EyerGominoGaussianBlur * gb = new Eyer::EyerGominoGaussianBlur();
                         pip << gb;
                         blurList.insertBack(gb);
                     }
+                } else if ((EyerVideoFilterType)filterType == EyerVideoFilterType::ZOOM_BLUR){
+                    for(int j=0; j<level; j++){
+                        Eyer::EyerGominoZoomBlur * zb = new Eyer::EyerGominoZoomBlur();
+                        pip << zb;
+                        blurList.insertBack(zb);
+                    }
                 }
             }
-            
-            // pip << &gb0;
-            // pip << &gb1;
-            // pip << &gb2;
-            // pip << &gb3;
-
-            // Eyer::EyerGominoGaussianBlur gb0;
-            // Eyer::EyerGominoGaussianBlur gb1;
-            // Eyer::EyerGominoGaussianBlur gb2;
-            // Eyer::EyerGominoGaussianBlur gb3;
 
             pip.Go(&yuv2rgbTexture, &panel->targetTexture, width, height);
-            for(int i=0; i<blurList.getLength(); i++){
-                blurList.clear();
-            }
+            blurList.clear();
 
             {
                 float x = 0.0;

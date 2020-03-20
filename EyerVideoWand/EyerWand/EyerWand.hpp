@@ -282,6 +282,11 @@ namespace Eyer {
         double t;
         EyerLinkedList<int> filterNameList;
         int level;
+
+        EyerFilterKey();
+        EyerFilterKey(const EyerFilterKey & fk);
+
+        EyerFilterKey & operator = (const EyerFilterKey & fk);
     };
 
     enum EyerVideoFragmentType

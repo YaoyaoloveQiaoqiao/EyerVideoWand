@@ -57,10 +57,10 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     layer1.SetFrame(0, fps * 5);
 
     Eyer::EyerVideoLayout layer2;
-    layer2.SetFrame(fps * 5, fps * 10);
+    layer2.SetFrame(0, fps * 6);
 
     Eyer::EyerVideoLayout layer3;
-    layer3.SetFrame(fps * 10, fps * 15);
+    layer3.SetFrame(fps * 5, fps * 10);
 
     Eyer::EyerVideoLayout layer4;
     layer4.SetFrame(fps * 15, fps * 20);
@@ -78,39 +78,36 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     videoFragment.AddTransKey(0.5, 0.0, 0.0, 0.0);
 
     videoFragment.AddScaleKey(0.0, 1920.0, 1080.0, 0.0);
-    videoFragment.AddScaleKey(5.0, 1920.0 / 2, 1080.0 / 2, 0.0);
+    videoFragment.AddScaleKey(5.0, 1920.0, 1080.0, 0.0);
 
     Eyer::EyerLinkedList<int> filterNameList;
+    //filterNameList.insertBack((int)Eyer::EyerVideoFilterType::GAUSSIAN_BLUR);
     filterNameList.insertBack((int)Eyer::EyerVideoFilterType::GAUSSIAN_BLUR);
 
-    videoFragment.AddFilterKey(0.1, filterNameList, 2);
+
+    videoFragment.AddFilterKey(0.0, filterNameList, 12);
+    videoFragment.AddFilterKey(1.0, filterNameList, 0);
+
     videoFragment.Print();
 
     Eyer::EyerVideoFragmentVideo videoFragment2;
     videoFragment2.LoadVideoFile("./demo.mp4");
-    videoFragment2.AddTransKey(0.0, 0.0, 0.0, 0.0);
+    /*videoFragment2.AddTransKey(0.0, 0.0, 0.0, 0.0);
     videoFragment2.AddTransKey(0.1, -30.0, -30.0, 0.0);
     videoFragment2.AddTransKey(0.2, 30.0, 30.0, 0.0);
     videoFragment2.AddTransKey(0.3, -20.0, -20.0, 0.0);
     videoFragment2.AddTransKey(0.4, 20.0, 20.0, 0.0);
     videoFragment2.AddTransKey(0.5, 10.0, 10.0, 0.0);
-    videoFragment2.AddTransKey(0.6, 0.0, 0.0, 0.0);
-
-
-    videoFragment2.AddTransKey(2.1, 0.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(2.2, 0.0, 20.0, 0.0);
-    videoFragment2.AddTransKey(2.3, 0.0, -20.0, 0.0);
-    videoFragment2.AddTransKey(2.4, 0.0, 10.0, 0.0);
-    videoFragment2.AddTransKey(2.5, 0.0, -10.0, 0.0);
-    videoFragment2.AddTransKey(2.6, 0.0, 6.0, 0.0);
-    videoFragment2.AddTransKey(2.7, 0.0, 0.0, 0.0);
+    videoFragment2.AddTransKey(0.6, 0.0, 0.0, 0.0);*/
 
     videoFragment2.AddScaleKey(0.0, 1920.0, 1080.0, 0.0);
-    videoFragment2.AddScaleKey(5.0, 1920.0 / 2, 1080.0 / 2, 0.0);
+    videoFragment2.AddScaleKey(5.0, 1920.0 , 1080.0 , 0.0);
 
-    Eyer::EyerLinkedList<int> filterNameList2;
-    filterNameList2.insertBack((int)Eyer::EyerVideoFilterType::GAUSSIAN_BLUR);
-    videoFragment2.AddFilterKey(0.1, filterNameList2, 4);
+/*    Eyer::EyerLinkedList<int> filterNameList2;
+    filterNameList2.insertBack((int)Eyer::EyerVideoFilterType::ZOOM_BLUR);
+
+    videoFragment2.AddFilterKey(0, filterNameList2, 16);
+    videoFragment2.AddFilterKey(1.0, filterNameList2, 0);*/
 
 
    /* videoFragment2.AddTransKey(4.1, 0.0, 0.0, 0.0);
@@ -140,9 +137,14 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     layer2.AddVideoFragment(&videoFragment2);
 
     Eyer::EyerVideoFragmentVideo videoFragmentImage;
-    videoFragmentImage.LoadVideoFile("./2.jpg");
-    videoFragmentImage.AddScaleKey(0.0, 960.0, 540.0, 0.0);
-    videoFragmentImage.AddScaleKey(5.0, 1460.0, 840.0, 0.0);
+    videoFragmentImage.LoadVideoFile("./6.jpg");
+    videoFragmentImage.AddScaleKey(0.0, 1920.0 *1.5, 1080.0*1.5, 0.0);
+    videoFragmentImage.AddScaleKey(5.0, 1920.0, 1080.0, 0.0);
+    Eyer::EyerLinkedList<int> filterNameList3;
+    filterNameList3.insertBack((int)Eyer::EyerVideoFilterType::ZOOM_BLUR);
+
+    videoFragmentImage.AddFilterKey(0, filterNameList3, 1);
+    videoFragmentImage.AddFilterKey(5.0, filterNameList3, 1);
 
     layer3.AddVideoFragment(&videoFragmentImage);
 
@@ -162,9 +164,9 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     layer5.AddVideoFragment(&videoFragmentImage3);
 
     videoTrack.AddLayer(layer1);
-    videoTrack.AddLayer(layer2);
-    /*
+    //videoTrack.AddLayer(layer2);
     videoTrack.AddLayer(layer3);
+    /*
     videoTrack.AddLayer(layer4);
     videoTrack.AddLayer(layer5);
     */
@@ -185,7 +187,6 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
 
     builder.AddVideoTrack(videoTrack);
     builder.AddAudioTrack(audioTrack);
-    printf("bbbbbbbbbbbbbbbbbbbbbbbb/n");
     builder.Process();
 }
 

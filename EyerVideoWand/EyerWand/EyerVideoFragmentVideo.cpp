@@ -36,6 +36,15 @@ namespace Eyer
             }
         }
         scaleKeyList.clear();
+
+        for(int i=0; i<filterKeyList.getLength(); i++){
+            EyerFilterKey * filterKey = nullptr;
+            filterKeyList.find(i, filterKey);
+            if(filterKey != nullptr){
+                delete filterKey;
+            }
+        }
+        filterKeyList.clear();
     }
 
     EyerVideoFragmentVideo & EyerVideoFragmentVideo::operator = (const EyerVideoFragmentVideo & fragment)
@@ -67,6 +76,15 @@ namespace Eyer
             if(scaleKey != nullptr){
                 EyerTransKey * sk = new EyerTransKey(*scaleKey);
                 scaleKeyList.insertBack(sk);
+            }
+        }
+
+        for(int i=0; i<fragment.filterKeyList.getLength(); i++){
+            EyerFilterKey * filterKey = nullptr;
+            fragment.filterKeyList.find(i, filterKey);
+            if(filterKey != nullptr){
+                EyerFilterKey * fk = new EyerFilterKey(*filterKey);
+                filterKeyList.insertBack(fk);
             }
         }
 
@@ -253,18 +271,69 @@ namespace Eyer
         }
 
         filterKeyList.insertBack(filterKey);
+
+        return 0;
     }
 
     int EyerVideoFragmentVideo::filterLinear(double t, EyerLinkedList<int> & filterNameList, int & level)
     {
-        EyerFilterKey * filterKey;
-        filterKeyList.find(0, filterKey);
+        if(filterKeyList.getLength() <= 0){
+            return 0;
+        }
 
-        int data;
-        filterKey->filterNameList.find(0,data);
+        EyerLinkedEle<Eyer::EyerFilterKey *> * currentEle = filterKeyList.head;
+        for(int i=0; i< filterKeyList.getLength()-1; i++){
+            EyerLinkedEle<Eyer::EyerFilterKey *> * temp = currentEle->next;
+            while (temp != nullptr){
+                if(temp->data->t < currentEle->data->t){
+                    Eyer::EyerFilterKey * data = currentEle->data;
+                    currentEle->data = temp->data;
+                    temp->data = data;
+                }
+                temp = temp->next;
+            }
+            if(currentEle->next != nullptr){
+                currentEle = currentEle->next;
+            }
+        }
 
-        filterNameList.insertBack(data);
-        level = filterKey->level;
+        EyerFilterKey * firstData = nullptr;
+        EyerFilterKey * lastData = nullptr;
+        filterKeyList.find(0, firstData);
+        filterKeyList.find(filterKeyList.getLength()-1, lastData);
+
+        if(t < firstData->t){
+            level = firstData->level;
+            for(int j=0; j<firstData->filterNameList.getLength(); j++){
+                int filterName = -1;
+                firstData->filterNameList.find(j, filterName);
+                filterNameList.insertBack(filterName);
+            }
+            return 0;
+        }else if(t > lastData->t){
+            level = lastData->level;
+            for(int j=0; j<lastData->filterNameList.getLength(); j++){
+                int filterName = -1;
+                lastData->filterNameList.find(j, filterName);
+                filterNameList.insertBack(filterName);
+            }
+            return 0;
+        }
+
+        for(int i=0; i<filterKeyList.getLength(); i++){
+            filterKeyList.find(i, firstData);
+            filterKeyList.find(i+1, lastData);
+            if(t >= firstData->t && t < lastData->t){
+                double tPart = (t - firstData->t)/(lastData->t - firstData->t);
+                level = (int)(tPart * (lastData->level - firstData->level) + firstData->level);
+                for(int j=0; j<firstData->filterNameList.getLength(); j++){
+                    int filterName = -1;
+                    firstData->filterNameList.find(j, filterName);
+                    filterNameList.insertBack(filterName);
+                }
+                return 0;
+            }
+        }
         return 0;
     }
 

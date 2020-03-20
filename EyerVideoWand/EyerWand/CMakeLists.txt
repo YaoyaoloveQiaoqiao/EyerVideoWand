@@ -25,6 +25,7 @@ add_library(
         EyerVideoFragmentVideo.cpp
         EyerVideoFragment.cpp
         EyerTransKey.cpp
+        EyerFilterKey.cpp
         )
 
 target_link_libraries (EyerWand EyerAV)
