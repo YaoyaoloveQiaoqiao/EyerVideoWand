@@ -250,18 +250,9 @@ namespace Eyer
             double dTime = sampSize * 1.0 / 44100;
 
             Eyer::EyerAVFrame avFrame;
+            avFrame.InitAACFrame(6);
 
-            int frameSize = encoder->GetFrameSize();
-            int size = encoder->GetBufferSize();
-
-            float * d = (float *)malloc(size);
-            for(int i=0;i<size / 4;i++){
-                d[i] = 0.2f;
-            }
-
-            audioTrack.RenderFrame(wirteTime, d, size);
-
-            avFrame.SetAudioData((unsigned char *)d, size, frameSize, 2, Eyer::EyerAVFormat::EYER_AV_SAMPLE_FMT_FLTP);
+            audioTrack.RenderFrame(wirteTime, avFrame);
 
             encoder->SendFrame(&avFrame);
             while(1){
@@ -284,11 +275,6 @@ namespace Eyer
 
                 wirteTime += dTime;
             }
-
-            if(d != nullptr){
-                free(d);
-            }
-
             // EyerLog("Time: %f\n", wirteTime);
 
             if(wirteTime >= audioTrack.GetCountTime()){

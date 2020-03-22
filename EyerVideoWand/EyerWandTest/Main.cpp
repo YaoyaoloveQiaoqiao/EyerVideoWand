@@ -101,8 +101,8 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     videoFragment2.AddTransKey(2.6, 0.0, 6.0, 0.0);
     videoFragment2.AddTransKey(2.7, 0.0, 0.0, 0.0);
 
-    videoFragment2.AddScaleKey(0.0, 1920.0, 1080.0, 0.0);
-    videoFragment2.AddScaleKey(5.0, 1920.0 / 2, 1080.0 / 2, 0.0);
+    videoFragment2.AddScaleKey(0.0, 1920.0 , 1080.0, 0.0);
+    videoFragment2.AddScaleKey(5.0, 1920.0, 1080.0, 0.0);
 
    /* videoFragment2.AddTransKey(4.1, 0.0, 0.0, 0.0);
     videoFragment2.AddTransKey(4.2, 30.0, 0.0, 0.0);
@@ -128,6 +128,7 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     videoFragmentText.SetText("这里是测试字幕");
 
     layer1.AddVideoFragment(&videoFragment);
+    layer1.AddVideoFragment(&videoFragmentText);
     layer2.AddVideoFragment(&videoFragment2);
 
     Eyer::EyerVideoFragmentVideo videoFragmentImage;
@@ -158,19 +159,28 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     videoTrack.AddLayer(layer4);
     videoTrack.AddLayer(layer5);
 
+
+    
     // 音频
     Eyer::EyerAudioTrack audioTrack;
 
     Eyer::EyerAudioLayer audioLayer;
-    audioLayer.SetTime(0.0, 10.0);
+    audioLayer.SetTime(0.0, 25.0);
 
-    Eyer::EyerAudioFragment audioFragment;
-    audioFragment.LoadAudioFile("./wei.mp3");
+    // Eyer::EyerAudioFragment audioFragment;
+    // audioFragment.LoadAudioFile("./error_test_video.mp4");
 
-    audioLayer.AddAudioFragment(audioFragment);
+    Eyer::EyerAudioFragment audioFragment2;
+    audioFragment2.LoadAudioFile("./M_1280_720.mp4");
+
+    Eyer::EyerAudioFragment audioFragment3;
+    audioFragment3.LoadAudioFile("./wei.aac");
+
+    // audioLayer.AddAudioFragment(audioFragment);
+    audioLayer.AddAudioFragment(audioFragment2);
+    audioLayer.AddAudioFragment(audioFragment3);
 
     audioTrack.AddLayer(audioLayer);
-
 
     builder.AddVideoTrack(videoTrack);
     builder.AddAudioTrack(audioTrack);
