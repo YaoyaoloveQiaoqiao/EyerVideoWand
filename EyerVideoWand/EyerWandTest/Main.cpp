@@ -77,8 +77,8 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     videoFragment.AddTransKey(0.4, 2.0, 0.0, 0.0);
     videoFragment.AddTransKey(0.5, 0.0, 0.0, 0.0);
 
-    videoFragment.AddScaleKey(0.0, 1920.0, 1080.0, 0.0);
-    videoFragment.AddScaleKey(5.0, 1920.0 / 2, 1080.0 / 2, 0.0);
+    videoFragment.AddScaleKey(0.0, 1920.0 * 2, 1080.0 * 2, 0.0);
+    videoFragment.AddScaleKey(5.0, 1920.0, 1080.0, 0.0);
 
     videoFragment.Print();
 
@@ -154,10 +154,10 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     layer5.AddVideoFragment(&videoFragmentImage3);
 
     videoTrack.AddLayer(layer1);
-    videoTrack.AddLayer(layer2);
-    videoTrack.AddLayer(layer3);
-    videoTrack.AddLayer(layer4);
-    videoTrack.AddLayer(layer5);
+    // videoTrack.AddLayer(layer2);
+    // videoTrack.AddLayer(layer3);
+    // videoTrack.AddLayer(layer4);
+    // videoTrack.AddLayer(layer5);
 
 
     

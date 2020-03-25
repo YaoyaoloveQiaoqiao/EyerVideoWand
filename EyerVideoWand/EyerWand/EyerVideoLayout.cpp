@@ -197,11 +197,11 @@ namespace Eyer
 
             Eyer::EyerGominoCopy cp0;
 
-            Eyer::EyerGominoZoomBlur zb0;
+            //Eyer::EyerGominoZoomBlur zb0;
 
             Eyer::EyerGominoPip pip;
             pip << &cp0;
-            pip << &zb0;
+            //pip << &zb0;
 
             pip.Go(&yuv2rgbTexture, &panel->targetTexture, width, height);
 
@@ -221,7 +221,6 @@ namespace Eyer
                 
                 scale.SetScale(scale_x / 2, scale_y / 2, scale_z / 2);
                 // scale.SetScale(1920.0 / 2, 1080.0 / 2, scale_z);
-
                 panel->mvp = ortho * trans * scale ;
             }
         }

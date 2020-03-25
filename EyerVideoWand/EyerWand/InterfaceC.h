@@ -24,6 +24,8 @@ extern "C"
 
     void *          eyer_wand_c_fragment_init                (const char * _out_path);
     int             eyer_wand_c_fragment_uninit              (void * _fragment);
+    int             eyer_wand_c_fragment_add_transkey        (void * _fragment, double t, float x, float y, float z);
+    int             eyer_wand_c_fragment_add_scalekey        (void * _fragment, double t, float x, float y, float z);
 
 
 

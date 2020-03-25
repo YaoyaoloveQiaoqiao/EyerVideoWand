@@ -110,3 +110,15 @@ int             eyer_wand_c_fragment_uninit              (void * _fragment)
     }
     return 0;
 }
+
+int             eyer_wand_c_fragment_add_transkey        (void * _fragment, double t, float x, float y, float z)
+{
+    Eyer::EyerVideoFragmentVideo * fragment = (Eyer::EyerVideoFragmentVideo *)_fragment;
+    return fragment->AddTransKey(t, x, y, z);
+}
+
+int             eyer_wand_c_fragment_add_scalekey        (void * _fragment, double t, float x, float y, float z)
+{
+    Eyer::EyerVideoFragmentVideo * fragment = (Eyer::EyerVideoFragmentVideo *)_fragment;
+    return fragment->AddScaleKey(t, x, y, z);
+}
