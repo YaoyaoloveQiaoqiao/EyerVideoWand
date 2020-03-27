@@ -28,6 +28,7 @@ namespace Eyer
 
     int EyerAudioFragment::LoadAudioFile(EyerString _path)
     {
+        printf("=========audio _path:%s\n", _path.str);
         path = _path;
         return 0;
     }

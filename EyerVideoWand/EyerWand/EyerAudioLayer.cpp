@@ -45,6 +45,7 @@ namespace Eyer
 
     int EyerAudioLayer::SetTime(double _startTime, double _endTime)
     {
+        printf("=================SetTime: start:%f, end:%f\n", _startTime, _endTime);
         startTime = _startTime;
         endTime = _endTime;
         return 0;
