@@ -299,29 +299,21 @@ namespace MB
         if(t < firstData->t){
             level = firstData->level;
             filterName = firstData->filterName;
-            printf("t<==============filterName:%d, level:%d, t:%f \n", filterName, level, t);
-
             return 0;
         }else if(t > lastData->t){
             level = lastData->level;
             filterName = lastData->filterName;
-            printf("t>==============filterName:%d, level:%d, t:%f \n", filterName, level, t);
-
             return 0;
         }
 
         for(int i=0; i<filterKeyList.getLength(); i++){
             filterKeyList.find(i, firstData);
             filterKeyList.find(i+1, lastData);
-            printf("=============firstData=filterName:%d, level:%d, t:%f \n", firstData->filterName, firstData->level, firstData->t);
-            printf("=============lastData=filterName:%d, level:%d, t:%f \n", lastData->filterName, lastData->level, lastData->t);
 
             if(t >= firstData->t && t < lastData->t){
                 double tPart = (t - firstData->t)/(lastData->t - firstData->t);
                 level = (int)(tPart * (lastData->level - firstData->level) + firstData->level);
                 filterName = firstData->filterName;
-                printf("t==============filterName:%d, level:%d, t:%f \n", filterName, level, t);
-
                 return 0;
             }
         }

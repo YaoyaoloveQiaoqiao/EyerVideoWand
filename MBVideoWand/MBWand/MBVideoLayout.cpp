@@ -194,7 +194,6 @@ namespace MB
             int filterName = -1;
             int level = -1;
             vfv->filterLinear(ts, filterName, level);
-            printf("==============filterName:%d, level:%d, t:%f \n", filterName, level, ts);
             MB::MBGominoCopy cp0;
             MB::MBGominoPip pip;
             pip << &cp0;
