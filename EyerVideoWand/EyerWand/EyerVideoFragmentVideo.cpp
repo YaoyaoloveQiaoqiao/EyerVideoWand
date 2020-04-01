@@ -85,8 +85,6 @@ namespace Eyer
 
     int EyerVideoFragmentVideo::LoadVideoFile(EyerString _path)
     {
-        RedLog("===========================_path:%s\n", _path.str);
-
         path = _path;
 
         if(videoResource == nullptr){
