@@ -112,7 +112,7 @@ namespace Eyer
 #endif
                 EyerVideoPanel * panel = new EyerVideoPanel();
                 EyerVideoFragment * fragmentP = nullptr;
-                int ret = layout->GetVideoPanel(panel, &fragmentP, fragmentIndex, frameIndex - layout->GetStartFrameIndex(), fps);
+                int ret = layout->GetVideoPanel(panel, &fragmentP, fragmentIndex, frameIndex - layout->GetStartFrameIndex(), fps, params);
                 if(ret){
                     continue;
                 }

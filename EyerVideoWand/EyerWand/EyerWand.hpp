@@ -238,7 +238,7 @@ namespace Eyer {
 
 
         int GetVideoFragmentCount();
-        int GetVideoPanel(EyerVideoPanel * panel, EyerVideoFragment ** fragmentP, int videoFragmentIndex, int layoutFrameIndex, int fps);
+        int GetVideoPanel(EyerVideoPanel * panel, EyerVideoFragment ** fragmentP, int videoFragmentIndex, int layoutFrameIndex, int fps, EyerVideoTrackRenderParams * params);
     private:
         int startFrameIndex = 0;
         int endFrameIndex = 0;
