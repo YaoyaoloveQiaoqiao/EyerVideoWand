@@ -112,7 +112,7 @@ namespace MB
 #endif
                 MBVideoPanel * panel = new MBVideoPanel();
                 MBVideoFragment * fragmentP = nullptr;
-                int ret = layout->GetVideoPanel(panel, &fragmentP, fragmentIndex, frameIndex - layout->GetStartFrameIndex(), fps);
+                int ret = layout->GetVideoPanel(panel, &fragmentP, fragmentIndex, frameIndex - layout->GetStartFrameIndex(), fps, params);
                 if(ret){
                     continue;
                 }

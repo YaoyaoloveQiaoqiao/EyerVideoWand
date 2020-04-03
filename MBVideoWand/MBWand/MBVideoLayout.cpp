@@ -78,7 +78,7 @@ namespace MB
         return videoFragmentList.getLength();
     }
 
-    int MBVideoLayout::GetVideoPanel(MBVideoPanel * panel, MBVideoFragment ** fragmentP,int videoFragmentIndex, int layoutFrameIndex, int fps)
+    int MBVideoLayout::GetVideoPanel(MBVideoPanel * panel, MBVideoFragment ** fragmentP,int videoFragmentIndex, int layoutFrameIndex, int fps, MBVideoTrackRenderParams * params)
     {
         MBVideoFragment * fragment = nullptr;
         videoFragmentList.find(videoFragmentIndex, fragment);
@@ -91,8 +91,8 @@ namespace MB
 
 
         MBMat4x4 ortho;
-        int w = 1920;
-        int h = 1080;
+        int w = params->videoW;
+        int h = params->videoH;
         ortho.SetOrtho(- w / 2.0, w / 2.0, h / 2.0, - h / 2.0, 0.0f, 1000.0f);
 
         MBMat4x4 scale;

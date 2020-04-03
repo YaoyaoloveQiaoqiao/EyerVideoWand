@@ -215,7 +215,11 @@ int             mb_c_text_fragment_style         (void * _text_fragment, int siz
     videoFragmentText->SetSize(size);
     videoFragmentText->SetColor(r, g, b);
     int width = videoFragmentText->GetTextWidth();
-    videoFragmentText->SetPos(video_width / 2.0 - width / 2.0, y);
+    if(x < 0){
+        videoFragmentText->SetPos(video_width / 2.0 - width / 2.0, y);
+    }else{
+        videoFragmentText->SetPos(x, y);
+    }
     return 0;
 }
 

@@ -88,7 +88,7 @@ namespace MB
 
         for(int i=0;i<activeLayerList.getLength();i++){
             MBAudioLayer * layer = nullptr;
-            layoutList.find(i, layer);
+            activeLayerList.find(i, layer);
 
             if(layer == nullptr){
                 continue;
@@ -96,7 +96,7 @@ namespace MB
 
             MBAVFrame * oFrame = new MBAVFrame();
             oFrame->InitAACFrame(6);
-            layer->RenderLayerFrame(ts, *oFrame);
+            layer->RenderLayerFrame(ts - layer->GetStartTime(), *oFrame);
             tempFrameManager.insertBack(oFrame);
 
 

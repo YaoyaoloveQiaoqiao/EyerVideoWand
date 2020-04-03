@@ -244,7 +244,7 @@ namespace MB {
 
 
         int GetVideoFragmentCount();
-        int GetVideoPanel(MBVideoPanel * panel, MBVideoFragment ** fragmentP, int videoFragmentIndex, int layoutFrameIndex, int fps);
+        int GetVideoPanel(MBVideoPanel * panel, MBVideoFragment ** fragmentP, int videoFragmentIndex, int layoutFrameIndex, int fps, MBVideoTrackRenderParams * params);
     private:
         int startFrameIndex = 0;
         int endFrameIndex = 0;
