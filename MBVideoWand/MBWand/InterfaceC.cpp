@@ -236,4 +236,16 @@ int             mb_c_fragment_add_filter          (void * _fragment, double t, i
     return fragment->AddFilterKey(t, filterId, level);
 }
 
+int             mb_c_text_fragment_width         (void * _text_fragment)
+{
+    MB::MBVideoFragmentText * videoFragmentText = (MB::MBVideoFragmentText *)_text_fragment;
+    return videoFragmentText->GetTextWidth();
+}
+
+int             mb_c_text_fragment_size          (void * _text_fragment, int size)
+{
+    MB::MBVideoFragmentText * videoFragmentText = (MB::MBVideoFragmentText *)_text_fragment;
+    return videoFragmentText->SetSize(size);
+}
+
 

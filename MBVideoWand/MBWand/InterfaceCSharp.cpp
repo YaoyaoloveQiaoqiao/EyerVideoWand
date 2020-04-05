@@ -153,3 +153,14 @@ int     mb_csharp_fragment_add_filter            (void * _fragment, double t, in
 {
     return mb_c_fragment_add_filter(_fragment, t, filterId, level);
 }
+
+int     mb_csharp_text_fragment_width            (void * _text_fragment)
+{
+    return mb_c_text_fragment_width(_text_fragment);
+}
+
+int     mb_csharp_text_fragment_size             (void * _text_fragment, int size)
+{
+    return mb_c_text_fragment_size(_text_fragment, size);
+}
+

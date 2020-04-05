@@ -44,5 +44,8 @@ extern "C"
     int             mb_c_text_fragment_uninit        (void * _text_fragment);
     int             mb_c_text_fragment_style         (void * _text_fragment, int size,  float x, float y, float r, float g, float b, int video_width);
     int             mb_c_layer_add_text_fragment     (void * _layer, void * _fragment);
+    int             mb_c_text_fragment_width         (void * _text_fragment);
+    int             mb_c_text_fragment_size          (void * _text_fragment, int size);
+
 
 }
