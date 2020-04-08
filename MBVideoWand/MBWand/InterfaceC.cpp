@@ -248,4 +248,11 @@ int             mb_c_text_fragment_size          (void * _text_fragment, int siz
     return videoFragmentText->SetSize(size);
 }
 
+int             mb_c_audio_fragment_set_weight    (void * _audio_fragment, float _weight)
+{
+    MB::MBAudioFragment * audioFragment = (MB::MBAudioFragment *)_audio_fragment;
+    return audioFragment->SetWeight(_weight);
+}
+
+
 

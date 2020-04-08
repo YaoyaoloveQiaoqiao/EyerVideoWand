@@ -179,10 +179,12 @@ TEST(MBVideoBuild, MBVideoBuild_Test){
     // audioFragment.LoadAudioFile("./error_test_video.mp4");
 
     MB::MBAudioFragment audioFragment2;
-    audioFragment2.LoadAudioFile("./M_1280_720.mp4");
+    audioFragment2.LoadAudioFile("./1.aac");
+    audioFragment2.SetWeight(0.3);
 
     MB::MBAudioFragment audioFragment3;
-    audioFragment3.LoadAudioFile("./wei.aac");
+    audioFragment3.LoadAudioFile("./2.aac");
+    audioFragment3.SetWeight(0.7);
 
     // audioLayer.AddAudioFragment(audioFragment);
     audioLayer.AddAudioFragment(audioFragment2);
@@ -191,7 +193,7 @@ TEST(MBVideoBuild, MBVideoBuild_Test){
     audioTrack.AddLayer(audioLayer);
 
     builder.AddVideoTrack(videoTrack);
-    //builder.AddAudioTrack(audioTrack);
+    builder.AddAudioTrack(audioTrack);
     builder.Process();
 }
 

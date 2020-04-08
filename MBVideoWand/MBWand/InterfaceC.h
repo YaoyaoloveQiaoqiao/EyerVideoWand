@@ -39,6 +39,7 @@ extern "C"
 
     void *          mb_c_audio_fragment_init          (const char * _out_path);
     int             mb_c_audio_fragment_uninit        (void * _audio_fragment);
+    int             mb_c_audio_fragment_set_weight    (void * _audio_fragment, float weight);
 
     void *          mb_c_text_fragment_init          (const char * _out_path, char * text);
     int             mb_c_text_fragment_uninit        (void * _text_fragment);

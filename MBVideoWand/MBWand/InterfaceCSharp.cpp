@@ -164,3 +164,8 @@ int     mb_csharp_text_fragment_size             (void * _text_fragment, int siz
     return mb_c_text_fragment_size(_text_fragment, size);
 }
 
+int     mb_csharp_audio_fragment_set_weight      (void * _audio_fragment, float _weight)
+{
+    return mb_c_audio_fragment_set_weight(_audio_fragment, _weight);
+}
+
