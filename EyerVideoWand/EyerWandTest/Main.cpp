@@ -2,6 +2,19 @@
 #include <gtest/gtest.h>
 #include <EyerWand/EyerWand.hpp>
 
+TEST(EyerVideoFragment, readpng){
+    Eyer::EyerVideoFragmentVideo videoFragment2;
+    videoFragment2.LoadVideoFile("./ear.png");
+    Eyer::EyerAVFrame avFrame;
+    videoFragment2.GetVideoFrame(avFrame, 0.0);
+    printf("========avframe height:%d, width:%d", avFrame.GetHeight(), avFrame.GetWidth());
+    unsigned char *rgbaData = nullptr;
+    avFrame.GetRGBA(rgbaData);
+    for(int i=0; i<20; i++){
+    printf("%c",*(rgbaData++));
+    }
+}
+
 TEST(EyerWand, Eyer_Decoder_Line){
     /*
     Eyer::EyerVideoDecoderLine decoderLine("./M_1280_720.mp4", 20.0);
@@ -44,6 +57,7 @@ TEST(EyerVideoTrack, EyerWandRes_Base){
 }
 
 TEST(EyerVideoBuild, EyerVideoBuild_Test){
+    /*
     int fps = 30;
 
     Eyer::EyerWandBuilder builder("./struct_builder_vidoe_mp4.mp4");
@@ -104,22 +118,6 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     videoFragment2.AddScaleKey(0.0, 1920.0 , 1080.0, 0.0);
     videoFragment2.AddScaleKey(5.0, 1920.0, 1080.0, 0.0);
 
-   /* videoFragment2.AddTransKey(4.1, 0.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.2, 30.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.3, -30.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.4, 20.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.5, -20.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.6, 10.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.7, 0.0, 0.0, 0.0);
-
-    videoFragment2.AddTransKey(6.3, 0.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(6.4, -30.0, -30.0, 0.0);
-    videoFragment2.AddTransKey(6.5, 30.0, 30.0, 0.0);
-    videoFragment2.AddTransKey(6.6, -20.0, -20.0, 0.0);
-    videoFragment2.AddTransKey(6.7, 20.0, 20.0, 0.0);
-    videoFragment2.AddTransKey(6.8, 10.0, 10.0, 0.0);
-    videoFragment2.AddTransKey(6.9, 0.0, 0.0, 0.0);
-*/
     videoFragment2.Print();
 
 
@@ -195,6 +193,7 @@ TEST(EyerVideoBuild, EyerVideoBuild_Test){
     builder.AddVideoTrack(videoTrack);
     builder.AddAudioTrack(audioTrack);
     builder.Process();
+    */
 }
 
 TEST(EyerBuilder, EyerBuilder){
