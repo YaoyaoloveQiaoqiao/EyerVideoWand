@@ -26,6 +26,7 @@ add_library(
         MBVideoFragment.cpp
         MBTransKey.cpp
         MBFilterKey.cpp
+        MBVideoFragmentFrameSequential.cpp
         )
 
 target_link_libraries (MBWand MBCore)
@@ -37,7 +38,7 @@ target_link_libraries (MBWand MBYUV)
 target_link_libraries (MBWand MBGPUDomino)
 target_link_libraries (MBWand MBGLAD)
 target_link_libraries (MBWand MBType)
-target_link_libraries (MBWand MBGLShader)
+target_link_libraries (MBWand MBImg)
 
 ADD_DEFINITIONS(-D EYER_DEBUG)
 

@@ -92,7 +92,12 @@ file(COPY
         DESTINATION
         ${CMAKE_CURRENT_BINARY_DIR}/
         )
-
+        
+file(COPY
+        ${CMAKE_CURRENT_SOURCE_DIR}/earl
+        DESTINATION
+        ${CMAKE_CURRENT_BINARY_DIR}/
+        )
 
 INSTALL(
         TARGETS MBWandTest

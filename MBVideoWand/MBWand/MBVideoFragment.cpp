@@ -11,6 +11,9 @@ namespace MB
         if(fragment->GetType() == MBVideoFragmentType::VIDEO_FRAGMENT_TEXT){
             f = new MBVideoFragmentText(*(MBVideoFragmentText *)fragment);
         }
+        if(fragment->GetType() == MBVideoFragmentType::VIDEO_FRAGMENT_FRAME_SEQUENTIAL){
+            f = new MBVideoFragmentFrameSequential(*(MBVideoFragmentFrameSequential *)fragment);
+        }
         return f;
     }
 

@@ -1,11 +1,14 @@
-#ifndef	EYER_LIB_AV_WAND_H
-#define	EYER_LIB_AV_WAND_H
+#ifndef	MB_LIB_AV_WAND_H
+#define	MB_LIB_AV_WAND_H
 
 #include "MBGL/MBGL.hpp"
 #include "MBGLWindow/MBGLWindow.hpp"
 #include "MBCore/MBCore.hpp"
 #include "MBAV/MBAV.hpp"
 #include "MBGLCustomComponent/MBGLCustomComponent.hpp"
+
+#include "MBImg/stb_image.h"
+#define STB_IMAGE_IMPLEMENTATION
 
 #define MB_WAND_VERSION "MBWand 1.0.0"
 
@@ -294,7 +297,8 @@ namespace MB {
     enum MBVideoFragmentType
     {
         VIDEO_FRAGMENT_VIDEO,
-        VIDEO_FRAGMENT_TEXT
+        VIDEO_FRAGMENT_TEXT,
+        VIDEO_FRAGMENT_FRAME_SEQUENTIAL
     };
 
     class MBVideoFragment
@@ -411,6 +415,40 @@ namespace MB {
         float posY = 0.0f;
     };
 
+    class MBVideoFragmentFrameSequential : public MBVideoFragment
+    {
+    public:
+        MBVideoFragmentFrameSequential();
+        ~MBVideoFragmentFrameSequential();
+
+        MBVideoFragmentFrameSequential(const MBVideoFragmentFrameSequential & vft);
+        MBVideoFragmentFrameSequential & operator = (const MBVideoFragmentFrameSequential & vft);
+
+        virtual MBVideoFragmentType GetType() const;
+
+        int GetData(MBMat4x4 & mvp, MBGLTexture * targetTexture, double time, MBVideoTrackRenderParams * params);
+
+        int SetDirPathModel(MBString path, int fileNum, int model);
+
+        int SetScale(float scaleX, float scaleY, float scaleZ);
+
+        int SetTrans(float x, float y, float z);
+
+    private:
+        MBString path;
+        int fileNum = 0;
+        //model 0动画只显示一次  1动画显示一次，且停留在最后一帧   2动画循环显示
+        int model = 0;
+        float x = 0.0;
+        float y = 0.0;
+        float z = 0.0;
+
+        float scaleX = 0.0;
+        float scaleY = 0.0;
+        float scaleZ = 0.0;
+
+        float fps = 10;
+    };
 
     class MBWandBuilder
     {

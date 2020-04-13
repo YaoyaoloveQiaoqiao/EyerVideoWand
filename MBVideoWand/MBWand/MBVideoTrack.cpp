@@ -153,6 +153,25 @@ namespace MB
 
                     params->frameBuffer->AddComponent(textDraw);
                 }
+                if(fragmentP->GetType() == MBVideoFragmentType::VIDEO_FRAGMENT_FRAME_SEQUENTIAL){
+                    MBGLMVPTextureDraw * mvpTextureDraw = new MBGLMVPTextureDraw();
+
+                    MBVideoFragmentFrameSequential * fragmentFrameSequential = (MBVideoFragmentFrameSequential *)fragmentP;
+
+                    MBMat4x4 panelMvp;
+                    // MBGLTexture targetTexture;
+                    int ret = fragmentFrameSequential->GetData(panelMvp, &panel->targetTexture, (float)frameIndex/(float)fps, params);
+                    if(ret != 0){
+                        break;
+                    }
+
+                    mvpTextureDraw->SetTexture(&panel->targetTexture);
+                    mvpTextureDraw->SetMVP(panelMvp);
+
+                    frameDrawList.insertBack(mvpTextureDraw);
+
+                    params->frameBuffer->AddComponent(mvpTextureDraw);
+                }
             }
         }
         params->frameBuffer->AddComponent(params->titleTextDraw);

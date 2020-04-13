@@ -2,6 +2,38 @@
 #include <gtest/gtest.h>
 #include <MBWand/MBWand.hpp>
 
+TEST(MBVideoFragment, readpng){
+    int fps = 30;
+
+    MB::MBWandBuilder builder("./struct_builder_vidoe_mp4_png.mp4");
+    builder.SetVideoWH(1280, 720);
+    builder.SetVideoFPS(fps);
+
+    // 视频
+    MB::MBVideoTrack videoTrack;
+
+    MB::MBVideoLayout layer1;
+    layer1.SetFrame(0, fps * 5);
+
+    MB::MBVideoFragmentVideo videoFragment2;
+    videoFragment2.LoadVideoFile("./1.jpg");
+    videoFragment2.AddScaleKey(0.0, 1280, 720, 1.0);
+    videoFragment2.AddScaleKey(5.0, 1280, 720, 1.0);
+
+    MB::MBVideoFragmentFrameSequential fragmentFrameSequential;
+    fragmentFrameSequential.SetDirPathModel("./earl", 24, 1);
+    fragmentFrameSequential.SetScale(400.0, 150.0, 0.0);
+    fragmentFrameSequential.SetTrans(0.0, 0.0, 0.0);
+    layer1.AddVideoFragment(&videoFragment2);
+    layer1.AddVideoFragment(&fragmentFrameSequential);
+
+    videoTrack.AddLayout(layer1);
+
+    builder.AddVideoTrack(videoTrack);
+
+    builder.Process();
+}
+
 TEST(MBWand, MB_Decoder_Line){
     /*
     MB::MBVideoDecoderLine decoderLine("./M_1280_720.mp4", 20.0);
@@ -44,6 +76,7 @@ TEST(MBVideoTrack, MBWandRes_Base){
 }
 
 TEST(MBVideoBuild, MBVideoBuild_Test){
+    /*
     int fps = 30;
 
     MB::MBWandBuilder builder("./struct_builder_vidoe_mp4.mp4");
@@ -104,22 +137,6 @@ TEST(MBVideoBuild, MBVideoBuild_Test){
     videoFragment2.AddScaleKey(0.0, 1920.0 , 1080.0, 0.0);
     videoFragment2.AddScaleKey(5.0, 1920.0, 1080.0, 0.0);
 
-   /* videoFragment2.AddTransKey(4.1, 0.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.2, 30.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.3, -30.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.4, 20.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.5, -20.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.6, 10.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(4.7, 0.0, 0.0, 0.0);
-
-    videoFragment2.AddTransKey(6.3, 0.0, 0.0, 0.0);
-    videoFragment2.AddTransKey(6.4, -30.0, -30.0, 0.0);
-    videoFragment2.AddTransKey(6.5, 30.0, 30.0, 0.0);
-    videoFragment2.AddTransKey(6.6, -20.0, -20.0, 0.0);
-    videoFragment2.AddTransKey(6.7, 20.0, 20.0, 0.0);
-    videoFragment2.AddTransKey(6.8, 10.0, 10.0, 0.0);
-    videoFragment2.AddTransKey(6.9, 0.0, 0.0, 0.0);
-*/
     videoFragment2.Print();
 
 
@@ -195,6 +212,7 @@ TEST(MBVideoBuild, MBVideoBuild_Test){
     builder.AddVideoTrack(videoTrack);
     builder.AddAudioTrack(audioTrack);
     builder.Process();
+    */
 }
 
 TEST(MBBuilder, MBBuilder){
