@@ -390,6 +390,8 @@ namespace MB {
         int SetColor(float r, float g, float b);
         int SetSize(float size);
         int SetPos(float x, float y);
+        int AddTransKey(double t, float x, float y);
+        int AddScaleKey(double t, float size);
 
         int GetTextWidth();
 
@@ -402,6 +404,9 @@ namespace MB {
 
         float GetSize();
 
+        int GetLinearTrans(double t, float & x, float & y);
+        int GetLinearScale(double t, float & size);
+
         virtual MBVideoFragmentType GetType() const;
 
     public:
@@ -413,6 +418,8 @@ namespace MB {
         float size = 100.0f;
         float posX = 0.0f;
         float posY = 0.0f;
+        MB::MBLinkedList<MBTransKey *> transKeyList;
+        MB::MBLinkedList<float> scaleKeyList;
     };
 
     class MBVideoFragmentFrameSequential : public MBVideoFragment

@@ -141,11 +141,16 @@ namespace MB
                     frameDrawList.insertBack(mvpTextureDraw);
                     params->frameBuffer->AddComponent(mvpTextureDraw);
                 }
-                if(fragmentP->GetType() == MBVideoFragmentType::VIDEO_FRAGMENT_TEXT){
+                if(fragmentP->GetType() == MBVideoFragmentType::VIDEO_FRAGMENT_TEXT){  
                     MBVideoFragmentText * vft = (MBVideoFragmentText *)fragmentP;
                     MBGLTextDraw * textDraw = new MBGLTextDraw(vft->fontPath);
+                    double ts = 1.0 / fps * (frameIndex - layout->GetStartFrameIndex());
+                    float posX = 0.0;
+                    float posY = 0.0;
+                    vft->GetLinearTrans(ts, posX, posY);
+                    printf("+++++++++++++posX:%f, posY:%f \n", posX, posY);
                     textDraw->SetText(vft->text);
-                    textDraw->SetPos(vft->GetPosX(), vft->GetPosY());
+                    textDraw->SetPos(posX, posY);
                     textDraw->SetSize(vft->GetSize());
                     textDraw->SetColor(vft->GetColorR(), vft->GetColorG(), vft->GetColorB());
 

@@ -254,5 +254,33 @@ int             mb_c_audio_fragment_set_weight    (void * _audio_fragment, float
     return audioFragment->SetWeight(_weight);
 }
 
+void *          mb_c_frame_sequence_fragment_init   (const char * _path, int fileNum, int model)
+{
+    MB::MBVideoFragmentFrameSequential * fragmentFrameSequential = new MB::MBVideoFragmentFrameSequential();
+    fragmentFrameSequential->SetDirPathModel(_path, fileNum, model);
+    return (void *)fragmentFrameSequential;
+}
+
+int             mb_c_frame_sequence_fragment_uninit (void * _frame_sequence_fragment)
+{
+    MB::MBVideoFragmentFrameSequential * fragmentFrameSequential =(MB::MBVideoFragmentFrameSequential *)_frame_sequence_fragment;
+    if(fragmentFrameSequential != NULL){
+        delete fragmentFrameSequential;
+    }
+    return 0;
+}
+
+int             mb_c_frame_sequence_fragment_scale  (void * _frame_sequence_fragment, float _scaleX, float _scaleY, float _scaleZ)
+{
+    MB::MBVideoFragmentFrameSequential * fragmentFrameSequential =(MB::MBVideoFragmentFrameSequential *)_frame_sequence_fragment;
+    return fragmentFrameSequential->SetScale(_scaleX, _scaleY, _scaleZ);
+}
+
+int             mb_c_frame_sequence_fragment_trans  (void * _frame_sequence_fragment, float _x, float _y, float _z)
+{
+    MB::MBVideoFragmentFrameSequential * fragmentFrameSequential =(MB::MBVideoFragmentFrameSequential *)_frame_sequence_fragment;
+    return fragmentFrameSequential->SetTrans(_x, _y, _z);
+}
+
 
 

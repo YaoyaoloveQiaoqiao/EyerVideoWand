@@ -169,3 +169,22 @@ int     mb_csharp_audio_fragment_set_weight      (void * _audio_fragment, float 
     return mb_c_audio_fragment_set_weight(_audio_fragment, _weight);
 }
 
+void *  mb_csharp_frame_sequence_fragment_init   (const char * _out_path, int fileNum, int model)
+{
+    return mb_c_frame_sequence_fragment_init(_out_path, fileNum, model);
+}
+
+int     mb_csharp_frame_sequence_fragment_uninit (void * _frame_sequence_fragment)
+{
+    return mb_c_frame_sequence_fragment_uninit(_frame_sequence_fragment);
+}
+
+int     mb_csharp_frame_sequence_fragment_scale  (void * _frame_sequence_fragment, float _scaleX, float _scaleY, float _scaleZ)
+{
+    return mb_c_frame_sequence_fragment_scale(_frame_sequence_fragment, _scaleX, _scaleY, _scaleZ);
+}
+
+int     mb_csharp_frame_sequence_fragment_trans  (void * _frame_sequence_fragment, float _x, float _y, float _z)
+{
+    return mb_c_frame_sequence_fragment_trans(_frame_sequence_fragment, _x, _y, _z);
+}

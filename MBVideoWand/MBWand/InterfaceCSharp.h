@@ -51,4 +51,8 @@ extern "C"
     int     mb_csharp_text_fragment_width            (void * _text_fragment);
     int     mb_csharp_text_fragment_size             (void * _text_fragment, int size);
 
+    void *  mb_csharp_frame_sequence_fragment_init   (const char * _out_path, int fileNum, int model);
+    int     mb_csharp_frame_sequence_fragment_uninit (void * _frame_sequence_fragment);
+    int     mb_csharp_frame_sequence_fragment_scale  (void * _frame_sequence_fragment, float _scaleX, float _scaleY, float _scaleZ);
+    int     mb_csharp_frame_sequence_fragment_trans  (void * _frame_sequence_fragment, float _x, float _y, float _z);
 }
