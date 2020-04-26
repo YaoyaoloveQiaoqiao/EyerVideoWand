@@ -2,7 +2,56 @@
 #include <gtest/gtest.h>
 #include <MBWand/MBWand.hpp>
 
+TEST(MBVideoFragment, whiteBG){
+    int fps = 30;
+
+    MB::MBWandBuilder builder("./struct_builder_vidoe_mp4_png.mp4");
+    builder.SetVideoWH(1280, 720);
+    builder.SetVideoFPS(fps);
+
+    // 视频
+    MB::MBVideoTrack videoTrack;
+
+    MB::MBVideoLayout layer1;
+    layer1.SetFrame(0, fps * 15);
+
+    MB::MBVideoFragmentVideo videoFragment2;
+    videoFragment2.LoadVideoFile("./white.jpg");
+    videoFragment2.AddScaleKey(0.0, 1280, 720, 1.0);
+    videoFragment2.AddScaleKey(5.0, 1280, 720, 1.0);
+
+    MB::MBVideoFragmentVideo videoFragment4;
+    videoFragment4.LoadVideoFile("./eggCooker.jpg");
+    videoFragment4.AddScaleKey(0.0, 100, 100, 1.0);
+    videoFragment4.AddScaleKey(5.0, 100, 100, 1.0);
+    videoFragment4.AddTransKey(0.0, -400, 0,0);
+    videoFragment4.AddTransKey(5.0, -400, 0,0);
+
+    MB::MBVideoFragmentVideo videoFragment3;
+    videoFragment3.LoadVideoFile("./qipao.mp4");
+    videoFragment3.AddScaleKey(0.0, 400, 400, 1.0);
+    videoFragment3.AddScaleKey(5.0, 400, 400, 1.0);
+
+    MB::MBVideoFragmentVideo videoFragment5;
+    videoFragment5.LoadVideoFile("./start.mp4");
+    videoFragment5.AddScaleKey(0.0, 500, 500, 1.0);
+    videoFragment5.AddScaleKey(5.0, 500, 500, 1.0);
+    videoFragment5.AddTransKey(0.0, 500, 0,0);
+    videoFragment5.AddTransKey(5.0, 500, 0,0);
+
+    layer1.AddVideoFragment(&videoFragment2);
+    layer1.AddVideoFragment(&videoFragment3);
+    layer1.AddVideoFragment(&videoFragment4);
+    layer1.AddVideoFragment(&videoFragment5);
+
+    videoTrack.AddLayout(layer1);
+
+    builder.AddVideoTrack(videoTrack);
+
+    builder.Process();
+}
 TEST(MBVideoFragmentText, GetLinearTrans){
+    /*
     int fps = 30;
 
     MB::MBWandBuilder builder("./struct_builder_vidoe_mp4_png.mp4");
@@ -28,38 +77,46 @@ TEST(MBVideoFragmentText, GetLinearTrans){
 
     builder.AddVideoTrack(videoTrack);
     builder.Process();
+    */
 }
 
 TEST(MBVideoFragment, readpng){
-    // int fps = 30;
+    /*
+    int fps = 30;
 
-    // MB::MBWandBuilder builder("./struct_builder_vidoe_mp4_png.mp4");
-    // builder.SetVideoWH(1280, 720);
-    // builder.SetVideoFPS(fps);
+    MB::MBWandBuilder builder("./struct_builder_vidoe_mp4_png.mp4");
+    builder.SetVideoWH(1280, 720);
+    builder.SetVideoFPS(fps);
 
-    // // 视频
-    // MB::MBVideoTrack videoTrack;
+    // 视频
+    MB::MBVideoTrack videoTrack;
 
-    // MB::MBVideoLayout layer1;
-    // layer1.SetFrame(0, fps * 5);
+    MB::MBVideoLayout layer1;
+    layer1.SetFrame(0, fps * 3);
 
-    // MB::MBVideoFragmentVideo videoFragment2;
-    // videoFragment2.LoadVideoFile("./1.jpg");
-    // videoFragment2.AddScaleKey(0.0, 1280, 720, 1.0);
-    // videoFragment2.AddScaleKey(5.0, 1280, 720, 1.0);
 
-    // MB::MBVideoFragmentFrameSequential fragmentFrameSequential;
-    // fragmentFrameSequential.SetDirPathModel("./earl", 24, 1);
-    // fragmentFrameSequential.SetScale(400.0, 150.0, 0.0);
-    // fragmentFrameSequential.SetTrans(0.0, 0.0, 0.0);
-    // layer1.AddVideoFragment(&videoFragment2);
-    // layer1.AddVideoFragment(&fragmentFrameSequential);
 
-    // videoTrack.AddLayout(layer1);
+    MB::MBVideoFragmentVideo fragment1;
+    fragment1.LoadVideoFile("./white.jpg");
 
-    // builder.AddVideoTrack(videoTrack);
+    fragment1.AddScaleKey(0.0, 1280, 720, 0.0);
+    fragment1.AddScaleKey(0.0, 1280, 720, 0.0);
 
-    // builder.Process();
+    MB::MBVideoFragmentVideo fragment2;
+    fragment2.LoadVideoFile("./qipao.mp4");
+    // fragment2.LoadVideoFile("./scoreChart.mp4");
+    fragment2.AddScaleKey(0.0, 500, 500, 0.0);
+    fragment2.AddScaleKey(0.0, 500, 500, 0.0);
+    layer1.AddVideoFragment(&fragment1);
+    layer1.AddVideoFragment(&fragment2);
+    videoTrack.AddLayout(layer1);
+
+    
+
+    builder.AddVideoTrack(videoTrack);
+
+    builder.Process();
+    */
 }
 
 TEST(MBWand, MB_Decoder_Line){

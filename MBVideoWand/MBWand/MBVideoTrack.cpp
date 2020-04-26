@@ -144,13 +144,14 @@ namespace MB
                 if(fragmentP->GetType() == MBVideoFragmentType::VIDEO_FRAGMENT_TEXT){  
                     MBVideoFragmentText * vft = (MBVideoFragmentText *)fragmentP;
                     MBGLTextDraw * textDraw = new MBGLTextDraw(vft->fontPath);
-                    double ts = 1.0 / fps * (frameIndex - layout->GetStartFrameIndex());
-                    float posX = 0.0;
-                    float posY = 0.0;
-                    vft->GetLinearTrans(ts, posX, posY);
-                    printf("+++++++++++++posX:%f, posY:%f \n", posX, posY);
+                    // double ts = 1.0 / fps * (frameIndex - layout->GetStartFrameIndex());
+                    // float posX = 0.0;
+                    // float posY = 0.0;
+                    // vft->GetLinearTrans(ts, posX, posY);
+                    //printf("+++++++++++++posX:%f, posY:%f \n", posX, posY);
                     textDraw->SetText(vft->text);
-                    textDraw->SetPos(posX, posY);
+                    //textDraw->SetPos(posX, posY);
+                    textDraw->SetPos(vft->GetPosX(), vft->GetPosY());
                     textDraw->SetSize(vft->GetSize());
                     textDraw->SetColor(vft->GetColorR(), vft->GetColorG(), vft->GetColorB());
 
@@ -165,7 +166,7 @@ namespace MB
 
                     MBMat4x4 panelMvp;
                     // MBGLTexture targetTexture;
-                    int ret = fragmentFrameSequential->GetData(panelMvp, &panel->targetTexture, (float)frameIndex/(float)fps, params);
+                    int ret = fragmentFrameSequential->GetData(panelMvp, &panel->targetTexture, (float)(frameIndex- layout->GetStartFrameIndex())/(float)fps, params);
                     if(ret != 0){
                         break;
                     }
