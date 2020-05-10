@@ -3,6 +3,7 @@
 #include <MBWand/MBWand.hpp>
 
 TEST(MBVideoFragment, whiteBG){
+    /*
     int fps = 30;
 
     MB::MBWandBuilder builder("./struct_builder_vidoe_mp4_png.mp4");
@@ -49,9 +50,10 @@ TEST(MBVideoFragment, whiteBG){
     builder.AddVideoTrack(videoTrack);
 
     builder.Process();
+    */
 }
 TEST(MBVideoFragmentText, GetLinearTrans){
-    /*
+    
     int fps = 30;
 
     MB::MBWandBuilder builder("./struct_builder_vidoe_mp4_png.mp4");
@@ -77,7 +79,7 @@ TEST(MBVideoFragmentText, GetLinearTrans){
 
     builder.AddVideoTrack(videoTrack);
     builder.Process();
-    */
+    
 }
 
 TEST(MBVideoFragment, readpng){
